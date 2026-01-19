@@ -8,16 +8,16 @@ import anansi.core.Coalition;
 import anansi.core.Ranking;
 import anansi.core.graph.Graph;
 import anansi.experiment.ExperimentResult;
-import sybilcentrality.strategy.EdgeRewiringStrategy;
-import sybilcentrality.strategy.SybilHidingStrategy;
+import sybilcentrality.strategy.edge.EdgeHeuristic;
+import sybilcentrality.strategy.sybil.SybilHidingStrategy;
 
 public class RealLifeSybilHidingExperiment extends SybilHidingExperiment {
 	
-	protected List<EdgeRewiringStrategy> edgeHeuristics;
+	protected List<EdgeHeuristic> edgeHeuristics;
 	
 	public RealLifeSybilHidingExperiment(String resultsDirPath, Graph g, int hidingBudget, int samples,
 			List<Centrality> centralities, List<SybilHidingStrategy> strategies, boolean sybilRing,
-			List<EdgeRewiringStrategy> edgeHeuristics) {
+			List<EdgeHeuristic> edgeHeuristics) {
 		super(resultsDirPath, g, hidingBudget, samples, centralities, strategies, sybilRing);
 		this.edgeHeuristics = edgeHeuristics;
 	}
@@ -33,7 +33,7 @@ public class RealLifeSybilHidingExperiment extends SybilHidingExperiment {
 				c -> c, c -> c.getRanking(g)));
 		for (Integer evader : selectPotentialEvaders(g).getRandom(samples)){
 			performSybilHiding(evader, res, beforeRankings);
-			for (EdgeRewiringStrategy h : edgeHeuristics){
+			for (EdgeHeuristic h : edgeHeuristics){
 				g.startRecordingHistory();
 				for (int step = 1; step <= hidingBudget; ++step)
 					h.decreaseCentrality(g, evader);

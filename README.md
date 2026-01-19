@@ -1,5 +1,5 @@
 # Sybil centrality hiding
-Code related to the paper "Sybil Attacks on Centrality Measures" M. Waniek.
+Code related to the paper "Sybil Attacks on Centrality Measures" (WWW 2026) by Marcin Waniek.
 
 The code is provided as a Java Eclipse project.
 

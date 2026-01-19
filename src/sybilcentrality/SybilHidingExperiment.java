@@ -14,7 +14,7 @@ import anansi.core.graph.LWGraph;
 import anansi.experiment.Experiment;
 import anansi.experiment.ExperimentResult;
 import anansi.utils.Utils;
-import sybilcentrality.strategy.SybilHidingStrategy;
+import sybilcentrality.strategy.sybil.SybilHidingStrategy;
 
 public class SybilHidingExperiment extends Experiment {
 

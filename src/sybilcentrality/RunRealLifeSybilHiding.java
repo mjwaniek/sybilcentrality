@@ -7,15 +7,16 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import anansi.core.NetworkDatasets;
 import anansi.core.graph.Graph;
 import anansi.experiment.ExperimentAggregator;
 import anansi.experiment.ExperimentResult;
 import anansi.experiment.Row;
-import sybilcentrality.strategy.EdgeRewiringStrategy;
-import sybilcentrality.strategy.ROAM;
 import anansi.utils.RChartPrinter;
 import anansi.utils.RChartPrinter.RChartBuilder;
+import anansi.utils.anet.ANETResource;
+import anansi.utils.anet.GraphImporter;
+import sybilcentrality.strategy.edge.EdgeHeuristic;
+import sybilcentrality.strategy.edge.ROAM;
 import anansi.utils.Utils;
 
 public class RunRealLifeSybilHiding extends RunSybilHiding {
@@ -27,12 +28,12 @@ public class RunRealLifeSybilHiding extends RunSybilHiding {
 		
 		RunRealLifeSybilHiding r = new RunRealLifeSybilHiding();
 
-		r.runSingle(NetworkDatasets.getArtisHamburgWTC2001(), hidingBudget, samples, sybilRing);
-		r.runSingle(NetworkDatasets.getArtisBali2002(), hidingBudget, samples, sybilRing);
-		r.runSingle(NetworkDatasets.getArtisMadrid2004(), hidingBudget, samples, sybilRing);
-		r.runSingle(NetworkDatasets.getArtisNovember17Greece(), hidingBudget, samples, sybilRing);
-		r.runSingle(NetworkDatasets.getArtisAustralianEmbassy2004(), hidingBudget, samples, sybilRing);
-		r.runSingle(NetworkDatasets.getArtisChristmasEve2000(), hidingBudget, samples, sybilRing);
+		r.runSingle(getArtisHamburgWTC2001(), hidingBudget, samples, sybilRing);
+		r.runSingle(getArtisBali2002(), hidingBudget, samples, sybilRing);
+		r.runSingle(getArtisMadrid2004(), hidingBudget, samples, sybilRing);
+		r.runSingle(getArtisNovember17Greece(), hidingBudget, samples, sybilRing);
+		r.runSingle(getArtisAustralianEmbassy2004(), hidingBudget, samples, sybilRing);
+		r.runSingle(getArtisChristmasEve2000(), hidingBudget, samples, sybilRing);
 		
 		r.aggregateAll();
 		r.printCharts();
@@ -43,7 +44,7 @@ public class RunRealLifeSybilHiding extends RunSybilHiding {
 		return "sybil-reallife";
 	}
 
-	protected List<EdgeRewiringStrategy> getEdgeHeuristics(Graph g){
+	protected List<EdgeHeuristic> getEdgeHeuristics(Graph g){
 		return Utils.aList(new ROAM(1), new ROAM(2), new ROAM(3));
 	}
 
@@ -119,4 +120,28 @@ public class RunRealLifeSybilHiding extends RunSybilHiding {
 		return res;
 	}
 
+
+	public static Graph getArtisAustralianEmbassy2004(){
+		return GraphImporter.importGraph(new ANETResource("terrorist/artis/artis-australian-embassy.anet"));
+	}
+	
+	public static Graph getArtisBali2002(){
+		return GraphImporter.importGraph(new ANETResource("terrorist/artis/artis-bali-2002.anet"));
+	}
+	
+	public static Graph getArtisChristmasEve2000(){
+		return GraphImporter.importGraph(new ANETResource("terrorist/artis/artis-christmas-eve.anet"));
+	}
+	
+	public static Graph getArtisHamburgWTC2001(){
+		return GraphImporter.importGraph(new ANETResource("terrorist/artis/artis-hamburg-wtc.anet"));
+	}
+	
+	public static Graph getArtisMadrid2004(){
+		return GraphImporter.importGraph(new ANETResource("terrorist/artis/artis-madrid-train.anet"));
+	}
+	
+	public static Graph getArtisNovember17Greece(){
+		return GraphImporter.importGraph(new ANETResource("terrorist/artis/artis-november-17-greece.anet"));
+	}
 }

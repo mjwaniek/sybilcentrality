@@ -12,14 +12,14 @@ import anansi.experiment.Row;
 import anansi.utils.RChartPrinter;
 import anansi.utils.Utils;
 import anansi.utils.RChartPrinter.RChartBuilder;
-import sybilcentrality.strategy.DensitySybilStrategy;
-import sybilcentrality.strategy.SybilHidingStrategy;
+import sybilcentrality.strategy.sybil.DensitySybilStrategy;
+import sybilcentrality.strategy.sybil.SybilHidingStrategy;
 
 public class RunDensitySybilHiding extends RunSybilHiding {
 
 	public static void main(String[] args) {
-		int times = args.length > 0 ? Integer.parseInt(args[0]) : 2; //20;
-		int n = args.length > 1 ? Integer.parseInt(args[1]) : 200; //1000;
+		int times = args.length > 0 ? Integer.parseInt(args[0]) : 20;
+		int n = args.length > 1 ? Integer.parseInt(args[1]) : 1000;
 		int samples = args.length > 2 ? Integer.parseInt(args[2]) : 10;
 		int hidingBudget = 10;
 		int avgDegree = 10;

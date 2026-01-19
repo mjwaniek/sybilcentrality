@@ -16,13 +16,12 @@ import anansi.experiment.ExperimentAggregator;
 import anansi.experiment.ExperimentResult;
 import anansi.experiment.ExperimentRunner;
 import anansi.experiment.Row;
-import sybilcentrality.strategy.CommunitySybilStrategy;
-import sybilcentrality.strategy.OptimalDegreeSybilStrategy;
-import sybilcentrality.strategy.RandomSybilStrategy;
-import sybilcentrality.strategy.SybilHidingStrategy;
-import sybilcentrality.RunSybilHiding;
 import anansi.utils.RChartPrinter;
 import anansi.utils.RChartPrinter.RChartBuilder;
+import sybilcentrality.strategy.sybil.CommunitySybilStrategy;
+import sybilcentrality.strategy.sybil.OptimalDegreeSybilStrategy;
+import sybilcentrality.strategy.sybil.RandomSybilStrategy;
+import sybilcentrality.strategy.sybil.SybilHidingStrategy;
 import anansi.utils.Utils;
 
 public class RunSybilHiding extends ExperimentRunner {
@@ -36,8 +35,8 @@ public class RunSybilHiding extends ExperimentRunner {
 			IgraphCommunityDetector.ALG_SPINGLASS, "Spinglass");
 
 	public static void main(String[] args) {
-		int times = args.length > 0 ? Integer.parseInt(args[0]) : 2; //20;
-		int n = args.length > 1 ? Integer.parseInt(args[1]) : 200; //1000;
+		int times = args.length > 0 ? Integer.parseInt(args[0]) : 20;
+		int n = args.length > 1 ? Integer.parseInt(args[1]) : 1000;
 		int samples = args.length > 2 ? Integer.parseInt(args[2]) : 10;
 		int hidingBudget = 5;
 		int avgDegree = 10;
